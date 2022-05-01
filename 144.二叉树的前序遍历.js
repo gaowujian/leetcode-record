@@ -18,21 +18,23 @@
  * @return {number[]}
  */
 
-var preorderTraversal = function (node) {
-  if (!node) {
+var preorderTraversal = function (root) {
+  if (!root) {
     return [];
   }
-  const stk = [node];
   const result = [];
-  while (stk.length > 0) {
-    const el = stk.pop();
-    result.push(el.val);
-    if (el.right) {
-      stk.push(el.right);
+  const stk = [];
+  let cur = root;
+  while (cur || stk.length > 0) {
+    while (cur) {
+      stk.push(cur);
+      result.push(cur.val);
+      cur = cur.left;
     }
-    if (el.left) {
-      stk.push(el.left);
-    }
+    // 跳出的时候 说明cur指向null
+    // 同时栈里也是最后转向null之前的最后一个值
+    const node = stk.pop();
+    cur = node.right;
   }
   return result;
 };

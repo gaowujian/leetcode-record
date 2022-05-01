@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=107 lang=javascript
+ * @lc app=leetcode.cn id=199 lang=javascript
  *
- * [107] 二叉树的层序遍历 II
+ * [199] 二叉树的右视图
  */
 
 // @lc code=start
@@ -15,21 +15,22 @@
  */
 /**
  * @param {TreeNode} root
- * @return {number[][]}
+ * @return {number[]}
  */
-var levelOrderBottom = function (root) {
+var rightSideView = function (root) {
   if (!root) {
     return [];
   }
-  const result = [];
   const queue = [];
   queue.push(root);
+  const result = [];
   while (queue.length !== 0) {
     const size = queue.length;
-    const subResult = [];
     for (let i = 0; i < size; i++) {
       const el = queue.shift();
-      subResult.push(el.val);
+      if (i === size - 1) {
+        result.push(el.val);
+      }
       if (el.left) {
         queue.push(el.left);
       }
@@ -37,12 +38,7 @@ var levelOrderBottom = function (root) {
         queue.push(el.right);
       }
     }
-    result.push(subResult);
   }
-  return result.reverse();
+  return result;
 };
 // @lc code=end
-
-// @after-stub-for-debug-begin
-module.exports = levelOrderBottom;
-// @after-stub-for-debug-end

@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=107 lang=javascript
+ * @lc app=leetcode.cn id=637 lang=javascript
  *
- * [107] 二叉树的层序遍历 II
+ * [637] 二叉树的层平均值
  */
 
 // @lc code=start
@@ -15,21 +15,21 @@
  */
 /**
  * @param {TreeNode} root
- * @return {number[][]}
+ * @return {number[]}
  */
-var levelOrderBottom = function (root) {
+var averageOfLevels = function (root) {
   if (!root) {
     return [];
   }
-  const result = [];
   const queue = [];
   queue.push(root);
+  const result = [];
   while (queue.length !== 0) {
     const size = queue.length;
-    const subResult = [];
+    let sum = 0;
     for (let i = 0; i < size; i++) {
       const el = queue.shift();
-      subResult.push(el.val);
+      sum += el.val;
       if (el.left) {
         queue.push(el.left);
       }
@@ -37,12 +37,8 @@ var levelOrderBottom = function (root) {
         queue.push(el.right);
       }
     }
-    result.push(subResult);
+    result.push(sum / size);
   }
-  return result.reverse();
+  return result;
 };
 // @lc code=end
-
-// @after-stub-for-debug-begin
-module.exports = levelOrderBottom;
-// @after-stub-for-debug-end
