@@ -21,15 +21,14 @@ var invertTree = function (root) {
   if (!root) {
     return root;
   }
-  function next(node) {
-    if (node.left || node.right) {
-      [node.left, node.right] = [node.right, node.left];
+  // 使用递归遍历，然后把左子树和右子树交换即可
+  function next(root) {
+    [root.left, root.right] = [root.right, root.left];
+    if (root.left) {
+      next(root.left);
     }
-    if (node.left) {
-      next(node.left);
-    }
-    if (node.right) {
-      next(node.right);
+    if (root.right) {
+      next(root.right);
     }
   }
   next(root);

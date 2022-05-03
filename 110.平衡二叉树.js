@@ -17,26 +17,24 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
+
+function getDepth(node) {
+  if (!node) {
+    return 0;
+  }
+  let depth = Math.max(getDepth(node.left), getDepth(node.right));
+  depth++;
+  return depth;
+}
 var isBalanced = function (root) {
-  if (root) {
+  if (!root) {
     return true;
-  } else {
-    return Math.abs(height(root.left) - height(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
   }
 
-  //   计算一个节点高度的函数
-  //   function height(node) {
-  //     if (!node) {
-  //       return 0;
-  //     }
-  //     return Math.max(height(node.left), height(node.right)) + 1;
-  //   }
-  function height() {
-    if (root == null) {
-      return 0;
-    } else {
-      return Math.max(height(root.left), height(root.right)) + 1;
-    }
+  if (isBalanced(root.left) && isBalanced(root.right) && Math.abs(getDepth(root.left) - getHeight(root.right)) <= 1) {
+    return true;
+  } else {
+    return false;
   }
 };
 // @lc code=end
