@@ -57,9 +57,18 @@ var buildTree = function (inorder, postorder) {
     leftSize--;
   }
 
+  //   ! 创建节点并添加分支的操作
+  //   !可以是先序
   const node = new TreeNode(rootValue);
   node.left = buildTree(inLeft, postLeft);
   node.right = buildTree(inRight, postRight);
+
+  //   !可以是后序遍历
+  //   const left = buildTree(inLeft, postLeft);
+  //   const right = buildTree(inRight, postRight);
+  //   const node = new TreeNode(rootValue);
+  //   node.left = left;
+  //   node.right = right;
   return node;
 };
 // @lc code=end
