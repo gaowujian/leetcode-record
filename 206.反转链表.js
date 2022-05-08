@@ -23,16 +23,18 @@
 
 // head表示需要反转链表的头节点
 var reverseList = function (head) {
-  if (!head) return null;
-  let slow = null;
-  let fast = head;
-  while (fast) {
-    let nextFast = fast.next;
-    fast.next = slow;
-    slow = fast;
-    fast = nextFast;
+  if (!head) {
+    return null;
   }
-  return slow;
+  if (!head.next) {
+    return head;
+  }
+  // last在递归的过程中一直没动，通过return一直返回
+  const last = reverseList(head.next);
+  // 打断链子
+  head.next.next = head;
+  head.next = null;
+  return last;
 };
 // @lc code=end
 
@@ -56,11 +58,16 @@ module.exports = reverseList;
 
 // * 递归写法
 // var reverseList = function (head) {
-//   if (!head) return null;
-//   if (!head.next) return head;
-//   const reversedHead = reverseList(head.next);
-
+//   if (!head) {
+//     return null;
+//   }
+//   if (!head.next) {
+//     return head;
+//   }
+//   // last在递归的过程中一直没动，通过return一直返回
+//   const last = reverseList(head.next);
+//   // 打断链子
 //   head.next.next = head;
 //   head.next = null;
-//   return reversedHead;
+//   return last;
 // };
