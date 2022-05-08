@@ -39,6 +39,23 @@
  * @return {number}
  */
 
+var maxArea = function (height) {
+  if (!height) {
+    return null;
+  }
+  let max = -Infinity;
+  let low = 0;
+  let high = height.length - 1;
+  while (low < high) {
+    const area = (high - low) * Math.min(height[low], height[high]);
+    max = Math.max(max, area);
+    // ! 指针的移动一定是这样的
+    // ! 如果自己就小，肯定是移动自己，而不会去移动其他的
+    height[low] < height[high] ? low++ : high--;
+  }
+  return max;
+};
+
 //  1. 第一种暴力解法。
 // 两层循环，求所有的bar之间的，两两计算的面积大小
 // var maxArea = function(height) {
@@ -51,17 +68,17 @@
 //   return max;
 // };
 // 2. 第二种双指针夹逼法则
-var maxArea = function(height) {
-  let max = 0;
-  let left = 0;
-  let right = height.length - 1;
-  while (left < right) {
-    // 求最大面积
-    max = Math.max(max, (right - left) * Math.min(height[left], height[right]));
-    // 根据情况移动指针
-    height[left] < height[right] ? left++ : right--;
-  }
-  return max;
-};
+// var maxArea = function(height) {
+//   let max = 0;
+//   let left = 0;
+//   let right = height.length - 1;
+//   while (left < right) {
+//     // 求最大面积
+//     max = Math.max(max, (right - left) * Math.min(height[left], height[right]));
+//     // 根据情况移动指针
+//     height[left] < height[right] ? left++ : right--;
+//   }
+//   return max;
+// };
 
 // @lc code=end
