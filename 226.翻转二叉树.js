@@ -19,19 +19,25 @@
  */
 var invertTree = function (root) {
   if (!root) {
-    return root;
+    return null;
   }
-  // 使用递归遍历，然后把左子树和右子树交换即可
-  function next(root) {
-    [root.left, root.right] = [root.right, root.left];
-    if (root.left) {
-      next(root.left);
-    }
-    if (root.right) {
-      next(root.right);
-    }
-  }
-  next(root);
+  const rootLeft = invertTree(root.left);
+  const rootRight = invertTree(root.right);
+  [root.right, root.left] = [rootLeft, rootRight];
   return root;
 };
 // @lc code=end
+
+// 1. 遍历思路解法，利用traverse函数和辅助变量
+// var invertTree = function (root) {
+//   function traversal(node) {
+//     if (!node) {
+//       return;
+//     }
+//     traversal(node.left);
+//     traversal(node.right);
+//     [node.left, node.right] = [node.right, node.left];
+//   }
+//   traversal(root);
+//   return root;
+// };

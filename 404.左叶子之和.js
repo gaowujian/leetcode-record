@@ -23,12 +23,27 @@ var sumOfLeftLeaves = function (root) {
   if (!root) {
     return 0;
   }
-  let leftValue = sumOfLeftLeaves(root.left);
-  let rightValue = sumOfLeftLeaves(root.right);
-  let midValue = 0;
+  let middle = 0;
+  // 判断是一个左叶子节点,这时候root。left是一个左叶子节点
   if (root.left && !root.left.left && !root.left.right) {
-    midValue += root.left.val;
+    middle += root.left.val;
   }
-  return leftValue + rightValue + midValue;
+
+  const leftValue = sumOfLeftLeaves(root.left);
+  const rightValue = sumOfLeftLeaves(root.right);
+  return leftValue + rightValue + middle;
 };
 // @lc code=end
+
+// var sumOfLeftLeaves = function (root) {
+//   if (!root) {
+//     return 0;
+//   }
+//   let leftValue = sumOfLeftLeaves(root.left);
+//   let rightValue = sumOfLeftLeaves(root.right);
+//   let midValue = 0;
+//   if (root.left && !root.left.left && !root.left.right) {
+//     midValue += root.left.val;
+//   }
+//   return leftValue + rightValue + midValue;
+// }
