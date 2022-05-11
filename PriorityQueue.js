@@ -1,14 +1,8 @@
 class Heap {
-  constructor(capacity) {
+  constructor() {
     this.heapSize = 0;
-    this.heap = new Array(capacity).fill(-1);
+    this.heap = new Array();
     this.forks = 2; //默认是一个二插堆的实现
-  }
-  isEmpty() {
-    return this.heapSize === 0;
-  }
-  isFull() {
-    return this.heapSize === this.heap.length;
   }
   /**
    *
@@ -30,9 +24,6 @@ class Heap {
 
   // 插入堆
   insert(el) {
-    if (this.isFull()) {
-      return new Error("堆已满，无法插入");
-    }
     // 1。放入堆的尾部
     this.heap[this.heapSize] = el;
     this.heapSize++;
@@ -69,9 +60,6 @@ class Heap {
    * @param {*} i 删除一个索引在i的元素,并返回
    */
   delete(i = 0) {
-    if (this.isEmpty()) {
-      throw new Error("堆是空,无法删除执行索引元素");
-    }
     const el = this.heap[i];
     // 把堆末尾的元素，放到了删除位置
     this.heap[i] = this.heap[this.heapSize - 1];
