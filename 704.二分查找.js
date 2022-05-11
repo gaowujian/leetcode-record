@@ -12,16 +12,19 @@
  */
 var search = function (nums, target) {
   let left = 0;
-  let right = nums.length;
+  let right = nums.length - 1;
   while (left < right) {
-    let middle = Math.floor(left + (right - left) / 2);
-    if (nums[middle] === target) return middle;
-    if (nums[middle] < target) {
-      left = middle + 1;
+    const mid = left + Math.floor((right - left) / 2);
+    if (nums[mid] === target) {
+      return mid;
+    } else if (nums[mid] < target) {
+      left++;
+    } else {
+      right--;
     }
-    if (nums[middle] > target) {
-      right = middle;
-    }
+  }
+  if (left === right && nums[left] === target) {
+    return left;
   }
   return -1;
 };

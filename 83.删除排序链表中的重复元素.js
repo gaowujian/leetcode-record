@@ -20,17 +20,17 @@ var deleteDuplicates = function (head) {
   if (!head || !head.next) {
     return head;
   }
-  let pre = head;
-  let cur = head.next;
-  while (cur) {
-    if (pre.val !== cur.val) {
-      pre = pre.next;
-      cur = cur.next;
-    } else {
-      cur = cur.next;
-      pre.next = cur;
+  let slow = head; //修改数据
+  let fast = head; //递归遍历索引
+  while (fast) {
+    if (slow.val !== fast.val) {
+      slow.next = fast;
+      slow = fast;
     }
+    fast = fast.next;
   }
+  // 断开最后一次可能存在的重复元素
+  slow.next = null;
   return head;
 };
 // @lc code=end
