@@ -34,19 +34,23 @@ var binaryTreePaths = function (root) {
         pathStr = pathStr + element.val + "->";
       }
       result.push(pathNodes.map((node) => node.val).join("->"));
+      return;
     }
 
     // *2. 当不满足条件的时候，我们应该怎么去做选择
-    // 这里做的选择比较简单，就是把当前节点放入了一个路径数组里并传下去
-    pathNodes.push(node);
 
+    // 选择列表里有两项，第一个是有左子树，第二个是有右子树
     if (node.left) {
+      // 做选择
+      pathNodes.push(node);
       backtrack(node.left, pathNodes);
       // 回溯，取消选择，就是把刚才放入的那个节点拿出来
       pathNodes.pop();
     }
 
     if (node.right) {
+      // 做选择
+      pathNodes.push(node);
       backtrack(node.right, pathNodes);
       // 回溯，取消选择
       pathNodes.pop();
