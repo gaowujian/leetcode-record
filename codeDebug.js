@@ -1,26 +1,15 @@
-/*
- * @lc app=leetcode.cn id=509 lang=javascript
- *
- * [509] 斐波那契数
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {number}
- */
-const memo = {};
-
 let count = 0;
 function printIndent(n) {
   let indentString = "";
   for (let i = 0; i < n; i++) {
-    // console.log("   ");
     indentString += "   ";
   }
   return indentString;
 }
 
+// 使用斐波那契数列做题进行距离
+// 在递归函数的开头，调用 printIndent(count++) 并打印关键变量；
+// 然后在所有 return 语句之前调用 printIndent(--count) 并打印返回值。
 var fib = function (n) {
   // printIndent(count);
   console.log(`${printIndent(count++)}循环${n}开始`);
@@ -40,24 +29,3 @@ var fib = function (n) {
   console.log(`${printIndent(--count)}循环${n}结束,结果:${result}`);
   return result;
 };
-
-// @lc code=end
-
-// @after-stub-for-debug-begin
-module.exports = fib;
-// @after-stub-for-debug-end
-
-// var fib = function (n) {
-//   if (n === 0 || n === 1) {
-//     return n;
-//   }
-//   const dp = [];
-//   dpA = 0;
-//   dpB = 1;
-//   for (let i = 2; i <= n; i++) {
-//     dp[i] = dpA + dpB;
-//     dpA = dpB;
-//     dpB = dp[i];
-//   }
-//   return dp[n];
-// };

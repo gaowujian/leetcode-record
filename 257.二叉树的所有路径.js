@@ -21,21 +21,33 @@
 var binaryTreePaths = function (root) {
   if (!root) return [];
   const result = [];
-  const paths = [];
-  function traverse(node) {
-    if (!node) return;
-    // 前置位置，遍历到这个节点就放入path中
-    paths.push(node.val);
-    // 如果不是叶子节点，直接放入
+
+  // node是遍历的节点，path是根节点到该点的路径节点数组
+  function traverse(node, pathNodes) {
+    // 做选择,直接放入一个路径数组中
+    pathNodes.push(node);
+
     if (!node.left && !node.right) {
-      result.push(paths.join("->"));
+      let pathStr = "";
+      for (let i = 0; i < pathNodes.length; i++) {
+        const element = pathNodes[i];
+        pathStr = pathStr + element.val + "->";
+      }
+      result.push(pathNodes.map((node) => node.val).join("->"));
     }
-    traverse(node.left);
-    traverse(node.right);
-    // 遍历完该节点后需要弹出
-    paths.pop();
+    if (node.left) {
+      traverse(node.left, pathNodes);
+      // 回溯
+      pathNodes.pop();
+    }
+
+    if (node.right) {
+      traverse(node.right, pathNodes);
+      // 回溯
+      pathNodes.pop();
+    }
   }
-  traverse(root);
+  traverse(root, []);
   return result;
 };
 
@@ -82,4 +94,25 @@ module.exports = binaryTreePaths;
 //           return `${root.val}->${item}`;
 //         });
 //   return converted;
+// };
+
+// var binaryTreePaths = function (root) {
+//   if (!root) return [];
+//   const result = [];
+//   const paths = [];
+//   function traverse(node) {
+//     if (!node) return;
+//     // 前置位置，遍历到这个节点就放入path中
+//     paths.push(node.val);
+//     // 如果不是叶子节点，直接放入
+//     if (!node.left && !node.right) {
+//       result.push(paths.join("->"));
+//     }
+//     traverse(node.left);
+//     traverse(node.right);
+//     // 遍历完该节点后需要弹出
+//     paths.pop();
+//   }
+//   traverse(root);
+//   return result;
 // };
