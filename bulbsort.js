@@ -72,13 +72,17 @@ function sort(arr, left, right) {
 }
 
 function partition(arr, left, right) {
-  let pivot = left; //设置一个基准值或阀值
+  let pivot = left; //默认pivot就是去取左边界，在函数执行过程中不会变，在函数结束的时候会返回一个新的pivot给上层
   let storageIndex = left + 1;
   //  !采用了类似虚拟头节点的做法，我的storage-1 最后指向的一定是一个小于等于pivot值的元素
   // 在此处指向的是最后一个比pivot小的元素的下一个指针，所以 slow-1指向的一定是比
   for (let i = storageIndex; i <= right; i++) {
     if (arr[i] < arr[pivot]) {
+      console.log(`快指针${i}和慢指针${storageIndex}的元素交换`);
+      console.log(`交换前`, arr);
       swap(arr, i, storageIndex);
+      console.log(`交换后`, arr);
+
       storageIndex++;
     }
   }
