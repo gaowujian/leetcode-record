@@ -24,13 +24,14 @@
 var binaryTreePaths = function (root) {
   if (!root) return [];
   const result = [];
-
+  // 缓存回溯状态
+  const path = [];
   // node是遍历的节点，
   // pathNodes是根节点到该点的路径节点数组,可跟踪
-  function backtrack(node, pathNodes) {
+  function backtrack(node) {
     // *1.满足条件的时候，我们可以做那些事
     if (!node.left && !node.right) {
-      result.push([...pathNodes, node].map((node) => node.val).join("->"));
+      result.push([...path, node].map((node) => node.val).join("->"));
       return;
     }
 
@@ -40,18 +41,18 @@ var binaryTreePaths = function (root) {
     // !全排列问题里里不止有两个选择会有更多个
     if (node.left) {
       // 做选择
-      pathNodes.push(node);
-      backtrack(node.left, pathNodes);
+      path.push(node);
+      backtrack(node.left);
       // 回溯，取消选择，就是把刚才放入的那个节点拿出来
-      pathNodes.pop();
+      path.pop();
     }
 
     if (node.right) {
       // 做选择
-      pathNodes.push(node);
-      backtrack(node.right, pathNodes);
+      path.push(node);
+      backtrack(node.right);
       // 回溯，取消选择
-      pathNodes.pop();
+      path.pop();
     }
   }
   backtrack(root, []);
