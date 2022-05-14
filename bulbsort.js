@@ -58,30 +58,57 @@ function selectSort(arr) {
 
 // console.log(insertSort(arr));
 
-function quickSort(arr, left, right) {
+/**
+ *
+ * @param {*} arr    arr是数组
+ * @param {*} left  left是左边界
+ * @param {*} right  right是右边界
+ */
+function sort(arr, left, right) {
   if (left >= right) return;
-  // let left = 0;
-  // let right = arr.length - 1;
-  let base = arr[left];
-  let x = left;
-  let y = right;
-  while (x < y) {
-    // 移动
-    while (x < y && arr[y] > base) {
-      y--;
-    }
-    arr[x] = arr[y];
-    x++;
-    while (x < y && arr[x] < base) {
-      x++;
-    }
-    arr[y] = arr[x];
-    y--;
-  }
-  arr[x] = base;
-  quickSort(arr, left, x - 1);
-  quickSort(arr, x + 1, right);
+  const p = partition(arr, left, right);
+  sort(arr, left, p - 1);
+  sort(arr, p + 1, right);
 }
 
-quickSort(arr, 0, arr.length - 1);
+function partition(arr, left, right) {
+  let pivot = left; //设置一个基准值或阀值
+  let storageIndex = left + 1;
+  //  !采用了类似虚拟头节点的做法，我的storage-1 最后指向的一定是一个小于等于pivot值的元素
+  // 在此处指向的是最后一个比pivot小的元素的下一个指针，所以 slow-1指向的一定是比
+  for (let i = storageIndex; i <= right; i++) {
+    if (arr[i] < arr[pivot]) {
+      swap(arr, i, storageIndex);
+      storageIndex++;
+    }
+  }
+  swap(arr, pivot, storageIndex - 1);
+  return storageIndex - 1;
+  // ! 本质思想还是个一个快慢指针
+  // let slow = left + 1; //存储指针用于记录真实，
+  // let fast = left + 1; // fast是一个记录趟数的指针
+  // while (fast <= right) {
+  //   if (arr[fast] < arr[pivot]) {
+  //     swap(arr, fast, slow);
+  //     slow++;
+  //   }
+  //   fast++;
+  // }
+  // swap(arr, pivot, slow - 1);
+  // return slow - 1;
+}
+function quickSort(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+  return sort(arr, left, right);
+}
+
+// 交换存储索引的函数
+function swap(arr, i, j) {
+  const tmp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = tmp;
+}
+
+quickSort(arr);
 console.log(arr);
