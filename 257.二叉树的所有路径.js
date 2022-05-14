@@ -17,16 +17,16 @@
  * @param {TreeNode} root
  * @return {string[]}
  */
+// * 这道题目的最经典解决方式还是回溯法
 
 var binaryTreePaths = function (root) {
   if (!root) return [];
   const result = [];
 
-  // node是遍历的节点，path是根节点到该点的路径节点数组
-  function traverse(node, pathNodes) {
-    // 做选择,直接放入一个路径数组中
-    pathNodes.push(node);
-
+  // node是遍历的节点，
+  // pathNodes是根节点到该点的路径节点数组,可跟踪
+  function backtrack(node, pathNodes) {
+    // *1.满足条件的时候，我们可以做那些事
     if (!node.left && !node.right) {
       let pathStr = "";
       for (let i = 0; i < pathNodes.length; i++) {
@@ -35,19 +35,24 @@ var binaryTreePaths = function (root) {
       }
       result.push(pathNodes.map((node) => node.val).join("->"));
     }
+
+    // *2. 当不满足条件的时候，我们应该怎么去做选择
+    // 这里做的选择比较简单，就是把当前节点放入了一个路径数组里并传下去
+    pathNodes.push(node);
+
     if (node.left) {
-      traverse(node.left, pathNodes);
-      // 回溯
+      backtrack(node.left, pathNodes);
+      // 回溯，取消选择，就是把刚才放入的那个节点拿出来
       pathNodes.pop();
     }
 
     if (node.right) {
-      traverse(node.right, pathNodes);
-      // 回溯
+      backtrack(node.right, pathNodes);
+      // 回溯，取消选择
       pathNodes.pop();
     }
   }
-  traverse(root, []);
+  backtrack(root, []);
   return result;
 };
 
@@ -57,7 +62,7 @@ var binaryTreePaths = function (root) {
 module.exports = binaryTreePaths;
 // @after-stub-for-debug-end
 
-// 1.第一种 遍历树的解法
+// 1.第一种 遍历树的解法，这也是一个回溯
 
 // var binaryTreePaths = function (root) {
 //   if (!root) return [];
@@ -114,5 +119,44 @@ module.exports = binaryTreePaths;
 //     paths.pop();
 //   }
 //   traverse(root);
+//   return result;
+// };
+
+// 4。回溯算法
+
+// var binaryTreePaths = function (root) {
+//   if (!root) return [];
+//   const result = [];
+
+//   // node是遍历的节点，
+//   // pathNodes是根节点到该点的路径节点数组,可跟踪
+//   function backtrack(node, pathNodes) {
+//     // 1.满足条件的时候，我们可以做那些事
+//     if (!node.left && !node.right) {
+//       let pathStr = "";
+//       for (let i = 0; i < pathNodes.length; i++) {
+//         const element = pathNodes[i];
+//         pathStr = pathStr + element.val + "->";
+//       }
+//       result.push(pathNodes.map((node) => node.val).join("->"));
+//     }
+
+//     // 2. 当不满足条件的时候，我们应该怎么去做选择
+//     // 这里做的选择比较简单，就是把当前节点放入了一个路径数组里并传下去
+//     pathNodes.push(node);
+
+//     if (node.left) {
+//       backtrack(node.left, pathNodes);
+//       // 回溯，取消选择，就是把刚才放入的那个节点拿出来
+//       pathNodes.pop();
+//     }
+
+//     if (node.right) {
+//       backtrack(node.right, pathNodes);
+//       // 回溯，取消选择
+//       pathNodes.pop();
+//     }
+//   }
+//   backtrack(root, []);
 //   return result;
 // };
