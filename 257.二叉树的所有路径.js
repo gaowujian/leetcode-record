@@ -18,6 +18,8 @@
  * @return {string[]}
  */
 // * 这道题目的最经典解决方式还是回溯法
+// ! 同时注意在使用回溯算法的时候，要注意引用数据类型的使用，错误的修改方式导致回溯失败，
+// ! 最好是拷贝一份新数据然后进行操作
 
 var binaryTreePaths = function (root) {
   if (!root) return [];
@@ -28,18 +30,14 @@ var binaryTreePaths = function (root) {
   function backtrack(node, pathNodes) {
     // *1.满足条件的时候，我们可以做那些事
     if (!node.left && !node.right) {
-      let pathStr = "";
-      for (let i = 0; i < pathNodes.length; i++) {
-        const element = pathNodes[i];
-        pathStr = pathStr + element.val + "->";
-      }
-      result.push(pathNodes.map((node) => node.val).join("->"));
+      result.push([...pathNodes, node].map((node) => node.val).join("->"));
       return;
     }
 
     // *2. 当不满足条件的时候，我们应该怎么去做选择
-
+    // *我们需要确保没有数据的引用，所以每次进来之后需要重新创建一份
     // 选择列表里有两项，第一个是有左子树，第二个是有右子树
+    // !全排列问题里里不止有两个选择会有更多个
     if (node.left) {
       // 做选择
       pathNodes.push(node);
