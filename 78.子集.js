@@ -14,7 +14,9 @@ var subsets = function (nums) {
   // 缓存回溯的状态
   const path = [];
 
-  function backtrack(nums, startIndex) {
+  // !回溯函数的参数需要对决策起作用，否则就不需要
+
+  function backtrack(startIndex) {
     // 做选择就是直接把pathNodes放到结果里去
     // ! 做选择的时候不一定会有if, 我们认为到了这一步传进来的就是结果
     if (true) {
@@ -26,12 +28,12 @@ var subsets = function (nums) {
     for (let i = startIndex; i < nums.length; i++) {
       // 做选择
       path.push(nums[i]);
-      backtrack(nums, i + 1);
+      backtrack(i + 1);
       // 回撤选择
       path.pop();
     }
   }
-  backtrack(nums, 0);
+  backtrack(0);
   console.log(result);
   return result;
 };
