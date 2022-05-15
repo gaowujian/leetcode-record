@@ -18,22 +18,23 @@
  * @return {boolean}
  */
 
-function check(left, right) {
-  //   终止条件
-  //   两个都是true或者都是false
-  if (!left && !right) {
-    return true;
-  }
-  //有一个是false，一个是true，返回false
-  if (!left || !right) {
-    return false;
-  }
-
-  return left.val === right.val && check(left.left, right.right) && check(left.right, right.left);
-}
 var isSymmetric = function (root) {
   if (!root) return true;
+  function check(left, right) {
+    //   终止条件
+    //   两个都是true或者都是false
+    if (!left && !right) {
+      return true;
+    }
+    //有一个是false，一个是true，返回false
+    if (!left || !right) {
+      return false;
+    }
 
+    const leftResult = check(left.left, right.right);
+    const rightResult = check(left.right, right.left);
+    return left.val === right.val && leftResult && rightResult;
+  }
   return check(root.left, root.right);
 };
 // @lc code=end

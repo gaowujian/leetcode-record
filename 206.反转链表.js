@@ -23,18 +23,12 @@
 
 // head表示需要反转链表的头节点
 var reverseList = function (head) {
-  if (!head) {
-    return null;
-  }
-  if (!head.next) {
-    return head;
-  }
-  // last在递归的过程中一直没动，通过return一直返回
-  const last = reverseList(head.next);
-  // 打断链子
+  if (!head) return null;
+  if (!head.next) return head;
+  const pre = reverseList(head.next);
   head.next.next = head;
   head.next = null;
-  return last;
+  return pre;
 };
 // @lc code=end
 

@@ -14,11 +14,8 @@ var lengthOfLongestSubstring = function (s) {
   let left = 0,
     right = 0;
   let maxLength = -Infinity;
-  //   const set = new Set();
-  let window = 0;
+  const set = new Set();
   while (right < s.length) {
-    right++;
-    window++;
     if (!set.has(s[right])) {
       set.add(s[right]);
       maxLength = Math.max(maxLength, set.size);
@@ -30,6 +27,7 @@ var lengthOfLongestSubstring = function (s) {
       //   一直删除到他没有位置，然后把新认识的放进集合，之后可以继续安全的增长长度
       set.add(s[right]);
     }
+    right++;
   }
   return maxLength;
 };

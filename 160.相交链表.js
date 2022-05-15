@@ -19,38 +19,30 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
-  if (!headA || !headB) {
-    return null;
-  }
-  let p1 = headA;
-  let p2 = headB;
-  while (p1 !== p2) {
-    if (!p1) {
-      p1 = headB;
-    }
-    p1 = p1.next;
+  let p = headA;
+  let q = headB;
 
-    if (!p2) {
-      p2 = headA;
+  while (p !== q) {
+    // 如果都指向null，说明找到了两个链表的末尾
+    if (!p && !q) {
+      return null;
     }
-    p2 = p2.next;
+    // 如果p空需要重置p，并进入下一次循环
+    if (!p) {
+      p = headB;
+      continue;
+    }
+    // 如果q空需要重置q，并进入下一次循环
+    if (!q) {
+      q = headA;
+      continue;
+    }
+    p = p.next;
+    q = q.next;
   }
-  return p1;
-  //   while (p1 !== p2) {
-  //     if (p1) {
-  //       p1 = p1.next;
-  //     } else {
-  //       p1 = headB;
-  //     }
-
-  //     if (p2) {
-  //       p2 = p2.next;
-  //     } else {
-  //       p2 = headA;
-  //     }
-  //   }
-  //   return p1;
+  return p;
 };
+
 // @lc code=end
 
 // @after-stub-for-debug-begin
@@ -75,3 +67,28 @@ module.exports = getIntersectionNode;
 //     }
 //     return null;
 //   };
+
+// var getIntersectionNode = function (headA, headB) {
+//   let p = headA;
+//   let q = headB;
+
+//   while (p !== q) {
+//     // 如果都指向null，说明找到了两个链表的末尾
+//     if (!p && !q) {
+//       return null;
+//     }
+//     // 如果p空需要重置p，并进入下一次循环
+//     if (!p) {
+//       p = headB;
+//       continue;
+//     }
+//     // 如果q空需要重置q，并进入下一次循环
+//     if (!q) {
+//       q = headA;
+//       continue;
+//     }
+//     p = p.next;
+//     q = q.next;
+//   }
+//   return p;
+// };

@@ -19,21 +19,26 @@
  * @return {TreeNode}
  */
 var lowestCommonAncestor = function (root, p, q) {
-  if (!root) return null;
-  // 在node节点的左右子树去查找p和q，查找到就返回最近的祖先节点
+  // 在一个root为头的树种，查找p和q，查找到后返回p或者q
   function find(node, p, q) {
     if (!node) return null;
     if (node.val === p.val || node.val === q.val) {
       return node;
     }
+
     const left = find(node.left, p, q);
     const right = find(node.right, p, q);
     if (left && right) {
       return node;
     }
-    return left ? left : right;
-  }
 
+    if (left && !right) {
+      return left;
+    }
+    if (right && !left) {
+      return right;
+    }
+  }
   return find(root, p, q);
 };
 // @lc code=end
@@ -41,3 +46,22 @@ var lowestCommonAncestor = function (root, p, q) {
 // @after-stub-for-debug-begin
 module.exports = lowestCommonAncestor;
 // @after-stub-for-debug-end
+
+// var lowestCommonAncestor = function (root, p, q) {
+//   if (!root) return null;
+//   // 在node节点的左右子树去查找p和q，查找到就返回最近的祖先节点
+//   function find(node, p, q) {
+//     if (!node) return null;
+//     if (node.val === p.val || node.val === q.val) {
+//       return node;
+//     }
+//     const left = find(node.left, p, q);
+//     const right = find(node.right, p, q);
+//     if (left && right) {
+//       return node;
+//     }
+//     return left ? left : right;
+//   }
+
+//   return find(root, p, q);
+// };

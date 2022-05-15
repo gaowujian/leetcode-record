@@ -20,6 +20,28 @@
 // 参数是一个链表的头节点，返回的是是否是回文串
 
 var isPalindrome = function (head) {
+  let p = head;
+  let start = head;
+  let isPalindrome = true;
+  function traverse(node) {
+    if (!node) return;
+    traverse(node.next);
+
+    if (node.val !== start.val) {
+      isPalindrome = false;
+    }
+    start = start.next;
+  }
+  traverse(p);
+  return isPalindrome;
+};
+// @lc code=end
+
+// @after-stub-for-debug-begin
+module.exports = isPalindrome;
+// @after-stub-for-debug-end
+
+var isPalindrome = function (head) {
   if (!head) {
     return true;
   }
@@ -30,19 +52,9 @@ var isPalindrome = function (head) {
       return true;
     }
     let result = traverse(node.next);
-    // if (left === result) {
-    //   left = left.next;
-    // } else {
-    //   finalResult = false;
-    // }
     result = result && left.val === node.val;
     left = left.next;
     return result;
   }
   return traverse(head);
 };
-// @lc code=end
-
-// @after-stub-for-debug-begin
-module.exports = isPalindrome;
-// @after-stub-for-debug-end
