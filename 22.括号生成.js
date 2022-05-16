@@ -13,7 +13,7 @@ var generateParenthesis = function (n) {
   const result = [];
   const path = [];
 
-  //   !回溯算法的参数列表，是可以做的所有选择
+  //   !回溯算法的参数列表，是每次选择后的所有状态
   //   在本道题目中，选择就是选 左括号或者右括号，等价于记录可用括号的个数
   function backtrack(left, right) {
     // 不可能先放右括号，所以右边可能比左边少
