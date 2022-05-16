@@ -1,4 +1,4 @@
-class Heap {
+class PriorityQueue {
   constructor() {
     this.heapSize = 0;
     this.heap = new Array();
@@ -114,25 +114,25 @@ class Heap {
   }
 }
 
-const bigHeap = new Heap(15);
+const pq = new PriorityQueue(15);
 
-bigHeap.insert(10);
-bigHeap.insert(12);
-bigHeap.insert(1);
-bigHeap.insert(14);
-bigHeap.insert(6);
-bigHeap.insert(5);
-bigHeap.insert(8);
-bigHeap.insert(15);
-bigHeap.insert(3);
-bigHeap.insert(9);
-bigHeap.insert(7);
-bigHeap.insert(4);
-bigHeap.insert(16);
+pq.insert(10);
+pq.insert(12);
+pq.insert(1);
+pq.insert(14);
+pq.insert(6);
+pq.insert(5);
+pq.insert(8);
+pq.insert(15);
+pq.insert(3);
+pq.insert(9);
+pq.insert(7);
+pq.insert(4);
+pq.insert(16);
 
-console.log(bigHeap);
+console.log(pq);
 
-console.log(bigHeap.delete());
-console.log(bigHeap);
-console.log(bigHeap.delete());
-console.log(bigHeap);
+console.log(pq.delete());
+console.log(pq);
+console.log(pq.delete());
+console.log(pq);
