@@ -22,8 +22,8 @@ var preorderTraversal = function (root) {
   if (!root) {
     return [];
   }
-  const result = [];
   const stk = [];
+  const result = [];
   let cur = root;
   while (cur || stk.length > 0) {
     while (cur) {
@@ -31,10 +31,8 @@ var preorderTraversal = function (root) {
       result.push(cur.val);
       cur = cur.left;
     }
-    // 跳出的时候 说明cur指向null
-    // 同时栈里也是最后转向null之前的最后一个值
-    const node = stk.pop();
-    cur = node.right;
+    const el = stk.pop();
+    cur = el.right;
   }
   return result;
 };
@@ -75,6 +73,27 @@ module.exports = preorderTraversal;
 //   }
 //   if (node.right) {
 //     preorderTraversal(node.right, result);
+//   }
+//   return result;
+// };
+
+// var preorderTraversal = function (root) {
+//   if (!root) {
+//     return [];
+//   }
+//   const result = [];
+//   const stk = [];
+//   let cur = root;
+//   while (cur || stk.length > 0) {
+//     while (cur) {
+//       stk.push(cur);
+//       result.push(cur.val);
+//       cur = cur.left;
+//     }
+//     // 跳出的时候 说明cur指向null
+//     // 同时栈里也是最后转向null之前的最后一个值
+//     const node = stk.pop();
+//     cur = node.right;
 //   }
 //   return result;
 // };

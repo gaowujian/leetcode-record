@@ -23,6 +23,23 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 
+var moveZeroes = function (nums) {
+  let slow = 0;
+  let fast = 0;
+  while (fast < nums.length) {
+    if (nums[fast] !== 0) {
+      nums[slow] = nums[fast];
+      slow++;
+    }
+    fast++;
+  }
+  while (slow < nums.length) {
+    nums[slow] = 0;
+    slow++;
+  }
+  return nums;
+};
+
 //  1. 理解题目
 //  2. 想多种解法
 
@@ -45,15 +62,15 @@
 // 双指针法
 // des 在遍历的过程中，我们维护一个指针，总是指向最后一个不为0的元素
 // 注意第52行的block 和56行的自增是不可以交换顺序的
-var moveZeroes = function(nums) {
-  let lastNotZero = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] != 0) {
-      nums[lastNotZero] = nums[i];
-      if (i != lastNotZero) {
-        nums[i] = 0;
-      }
-      lastNotZero++;
-    }
-  }
-};
+// var moveZeroes = function (nums) {
+//   let lastNotZero = 0;
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] != 0) {
+//       nums[lastNotZero] = nums[i];
+//       if (i != lastNotZero) {
+//         nums[i] = 0;
+//       }
+//       lastNotZero++;
+//     }
+//   }
+// };

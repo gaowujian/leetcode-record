@@ -18,22 +18,42 @@
  * @return {ListNode}
  */
 var detectCycle = function (head) {
-  if (!head) return null;
-  let slow = head,
-    fast = head;
-  tmp = null;
+  if (!head) return -1;
+  let slow = head;
+  let fast = head;
+  let tmp = null;
   while (fast && fast.next) {
     slow = slow.next;
     fast = fast.next.next;
     if (slow === fast) {
       tmp = head;
       while (tmp !== slow) {
-        tmp = tmp.next;
         slow = slow.next;
+        tmp = tmp.next;
       }
       return tmp;
     }
   }
-  return null;
 };
 // @lc code=end
+
+// var detectCycle = function (head) {
+//   if (!head) return null;
+//   let slow = head,
+//     fast = head;
+//   tmp = null;
+//   while (fast && fast.next) {
+//     slow = slow.next;
+//     fast = fast.next.next;
+//     if (slow === fast) {
+//       tmp = head;
+//       while (tmp !== slow) {
+
+//         tmp = tmp.next;
+//         slow = slow.next;
+//       }
+//       return tmp;
+//     }
+//   }
+//   return null;
+// };
