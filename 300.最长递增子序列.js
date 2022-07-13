@@ -23,8 +23,6 @@ var lengthOfLIS = function (nums) {
   for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < i; j++) {
       if (nums[j] < nums[i]) {
-        // const arr = dp.slice(j, i);
-        // dp[i] = Math.max(arr) + 1;
         const temp = dp[i];
         dp[i] = Math.max(dp[i], dp[j] + 1);
         // 修改指向
